@@ -10,9 +10,7 @@ import (
 )
 
 func ObtainCSV() {
-    if err := os.Mkdir("Data", os.ModePerm); err != nil {
-        log.Fatal(err)
-    }
+    os.Mkdir("Data", os.ModePerm)
 
     fName := "Data/top-websites.csv"
     file, err := os.Create(fName)
