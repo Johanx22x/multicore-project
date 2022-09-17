@@ -1,52 +1,20 @@
 package scrap
 
 import (
-    "os"
-    "encoding/csv"
-    "encoding/json"
-	"log"
-	"strings"
+	"encoding/csv"
 	"fmt"
+	"os"
+	"strings"
 
-	"github.com/crawlerclub/ce"
+	"crawler.club/ce"
 	"github.com/crawlerclub/dl"
 	"github.com/gocolly/colly"
 )
 
-// func GetQuery(url string) (string, error) {
-//     formatUrl := fmt.Sprintf("https://%s", url)
-
-//     fmt.Printf("Scanning %s\n", formatUrl)
-// 	resp, err := http.Get(formatUrl)
-// 	// handle the error if there is one
-// 	if err != nil {
-//         return "", err
-// 	}
-// 	// do this now so it won't be forgotten
-// 	defer resp.Body.Close()
-// 	// reads html as a slice of bytes
-// 	html, err := ioutil.ReadAll(resp.Body)
-// 	if err != nil {
-//         return "", err
-// 	}
-
-//     p := strings.NewReader(string(html))
-//     doc, _ := goquery.NewDocumentFromReader(p)
-
-//     doc.Find("script").Each(func(i int, el *goquery.Selection) {
-//         el.Remove()
-//     })
-
-//     return doc.Text(), nil
-// }
-
-func GetMetadata(url string) ([]byte, error) {
+func Metadata(url string) (ce.Doc, error) {
     url = fmt.Sprintf("https://%s", url)
 
 	res := dl.DownloadUrl(url)
-	if res.Error != nil {
-        return nil, res.Error
-	}
 
 	items := strings.Split(res.RemoteAddr, ":")
 	ip := ""
@@ -54,19 +22,14 @@ func GetMetadata(url string) ([]byte, error) {
 		ip = items[0]
 	}
 	doc := ce.ParsePro(url, res.Text, ip, true)
-    j, _ := json.Marshal(doc)
-    return j, nil
+    return *doc, nil
 }
 
 func ObtainCSV() {
     os.Mkdir("Data", os.ModePerm)
 
     fName := "Data/top-websites.csv"
-    file, err := os.Create(fName)
-    if err != nil {
-        log.Fatalf("Could not create file, err: %q", err)
-        return
-    }
+    file, _ := os.Create(fName)
     defer file.Close()
 
     writer := csv.NewWriter(file)
@@ -95,4 +58,3 @@ func ObtainCSV() {
 
     c.Visit("https://www.htmlstrip.com/alexa-top-1000-most-visited-websites#")
 }
-
