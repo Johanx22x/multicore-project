@@ -18,6 +18,7 @@ github.com/antchfx/xpath v1.2.1 h1:qhp4EW6aCOVr5XIkT+l6LJ9ck/JsUH/yyauNgTQkBF8=
 github.com/antchfx/xpath v1.2.1/go.mod h1:i54GszH55fYfBmoZXapTHN8T8tkcHfRgLyVwwqzXNcs=
 github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394 h1:OYA+5W64v3OgClL+IrOD63t4i/RW7RqrAVl9LTZ9UqQ=
 github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394/go.mod h1:Q8n74mJTIgjX4RBBcHnJ05h//6/k6foqmgE45jTQtxg=
+github.com/crawlerclub/ce v0.0.0-20210610150917-b66592ddb184 h1:FKNDzhE+aeXelo5ytOuAg0hCFXjeHe/QMiiBXvqqKvc=
 github.com/crawlerclub/ce v0.0.0-20210610150917-b66592ddb184/go.mod h1:BfisZVnMqgTylFYOsPjo3Cy4hPU3wT36OkZAhaEzD2o=
 github.com/crawlerclub/dl v0.0.0-20200622075740-2bbb15a2cf94 h1:lcUDurxDCcYvf74ZUwm8fq/KBefFOKJtnIsvGt1JXrg=
 github.com/crawlerclub/dl v0.0.0-20200622075740-2bbb15a2cf94/go.mod h1:0z1b5vturfXRQpPNhqmRRq6fzRLWWt0GPANzBdKqS1s=

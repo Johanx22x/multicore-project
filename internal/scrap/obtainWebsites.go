@@ -6,12 +6,12 @@ import (
 	"os"
 	"strings"
 
-	"crawler.club/ce"
 	"github.com/crawlerclub/dl"
+	"github.com/crawlerclub/ce"
 	"github.com/gocolly/colly"
 )
 
-func Metadata(url string) (ce.Doc, error) {
+func Metadata(url string) ce.Doc {
     url = fmt.Sprintf("https://%s", url)
 
 	res := dl.DownloadUrl(url)
@@ -21,8 +21,8 @@ func Metadata(url string) (ce.Doc, error) {
 	if len(items) > 0 {
 		ip = items[0]
 	}
-	doc := ce.ParsePro(url, res.Text, ip, true)
-    return *doc, nil
+	doc := *ce.ParsePro(url, res.Text, ip, true)
+    return doc 
 }
 
 func ObtainCSV() {
