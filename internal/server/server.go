@@ -3,6 +3,7 @@ package server
 import (
 	"log"
 	"net/http"
+    "fmt"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
@@ -10,25 +11,35 @@ import (
 // hello is a component that displays a simple "Hello World!". A component is a
 // customizable, independent, and reusable UI element. It is created by
 // embedding app.Compo into a struct.
-type hello struct {
+type myCompo struct {
 	app.Compo
 }
 
 // The Render method is where the component appearance is defined. Here, a
 // "Hello World!" is displayed as a heading.
-func (h *hello) Render() app.UI {
-	return app.H1().Text("Hello World!")
+func (c *myCompo) Render() app.UI {
+	data := map[string]int{
+		"Go":         10,
+		"JavaScript": 4,
+		"Python":     6,
+		"C":          8,
+	}
+
+	return app.Ul().Body(
+		app.Range(data).Map(func(k string) app.UI {
+			s := fmt.Sprintf("%s: %v/10", k, data[k])
+
+			return app.Li().Text(s)
+		}),
+	)
 }
 
-// The main function is the entry point where the app is configured and started.
-// It is executed in 2 different environments: A client (the web browser) and a
-// server.
 func Start() {
 	// The first thing to do is to associate the hello component with a path.
 	//
 	// This is done by calling the Route() function,  which tells go-app what
 	// component to display for a given path, on both client and server-side.
-	app.Route("/", &hello{})
+	app.Route("/", &myCompo{})
 
 	// Once the routes set up, the next thing to do is to either launch the app
 	// or the server that serves the app.
