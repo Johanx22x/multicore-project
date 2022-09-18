@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/Johanx22x/multicore-project/internal/json"
+	"github.com/Johanx22x/multicore-project/internal/jsonm"
 	"github.com/Johanx22x/multicore-project/internal/scrap"
 )
 
-const WORKERS = 8
+const WORKERS = 15
 
 func main() {
     scrap.ObtainCSV()
-    json.SaveMetadata()
-    json.LoadMetadata()
+    jsonm.SaveMetadata(WORKERS)
+    jsonm.LoadMetadata()
 }

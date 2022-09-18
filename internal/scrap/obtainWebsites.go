@@ -5,13 +5,16 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"sync"
 
-	"github.com/crawlerclub/dl"
 	"github.com/crawlerclub/ce"
+	"github.com/crawlerclub/dl"
 	"github.com/gocolly/colly"
 )
 
-func Metadata(url string) ce.Doc {
+func Metadata(wg *sync.WaitGroup, out chan ce.Doc, url string) {
+    defer wg.Done()
+
     url = fmt.Sprintf("https://%s", url)
 
 	res := dl.DownloadUrl(url)
@@ -22,7 +25,8 @@ func Metadata(url string) ce.Doc {
 		ip = items[0]
 	}
 	doc := *ce.ParsePro(url, res.Text, ip, true)
-    return doc 
+
+    out <- doc
 }
 
 func ObtainCSV() {
