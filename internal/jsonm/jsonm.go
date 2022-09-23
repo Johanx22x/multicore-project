@@ -8,6 +8,7 @@ import (
 	"os"
 	"sync"
 
+	"github.com/Johanx22x/multicore-project/internal/chartm"
 	"github.com/Johanx22x/multicore-project/internal/concurrent"
 	"github.com/Johanx22x/multicore-project/internal/csv"
 	"github.com/Johanx22x/multicore-project/internal/scrap"
@@ -79,24 +80,35 @@ func SaveMetadata(WORKERS int) {
 }
 
 // Load the obtained data from the JSON file
-func LoadMetadata() {
+func loadMetadata() (payload map[string]ce.Doc) {
     // Read the file and error management
     content, err := ioutil.ReadFile("Data/websites-metadata.json")
     if err != nil {
         log.Fatal(err)
     }
 
-    // Create a map for store the content
-    payload := make(map[string]ce.Doc)
     err = json.Unmarshal(content, &payload)
     if err != nil {
         log.Fatal("Error during Unmarshal(): ", err)
     }
+    return 
+}
 
-    // TODO: implement data return
-    cont := 0
+func ShowWebsitesInfo() {
+    langs := make(map[string]float64)
+    locations := make(map[string]float64)
+    contContent := 0
+
+    payload := loadMetadata()
     for _, page := range payload {
-        fmt.Println(cont, page.Url, page.Text)
-        cont++
+        if page.Text == "" { continue }
+        contContent++
+        langs[page.Language]++
+        locations[page.Location]++
     }
+
+    fmt.Printf("\nTotal number of websites from which information could be extracted: %d/1000\n\n", contContent)
+    fmt.Printf("Launch the local server to see more interactive content!\n\n")
+    chartm.CreateChart(langs, "Websites languages", "language")
+    chartm.CreateChart(locations, "Websites locations", "location")
 }
