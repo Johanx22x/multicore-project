@@ -8,6 +8,7 @@ import (
 	"os"
 	"sync"
 
+	"github.com/Johanx22x/multicore-project/internal/ansi"
 	"github.com/Johanx22x/multicore-project/internal/chartm"
 	"github.com/Johanx22x/multicore-project/internal/concurrent"
 	"github.com/Johanx22x/multicore-project/internal/csv"
@@ -107,8 +108,23 @@ func ShowWebsitesInfo() {
         locations[page.Location]++
     }
 
-    fmt.Printf("\nTotal number of websites from which information could be extracted: %d/1000\n\n", contContent)
-    fmt.Printf("Launch the local server to see more interactive content!\n\n")
+    fmt.Printf("\nTotal number of websites from which information could be extracted: %s%d/1000%s\n\n", ansi.BlueUnderline(), contContent, ansi.Reset())
+    fmt.Printf("%sLaunch the local server to see more interactive content!%s\n\n", ansi.CyanUnderline(), ansi.Reset())
+
     chartm.CreateChart(langs, "Websites languages", "language")
     chartm.CreateChart(locations, "Websites locations", "location")
+}
+
+func getKeywords() (keywords map[string][]string) {
+    // Read the file and error management
+    content, err := ioutil.ReadFile("Data/keywords-dataset-eng.json")
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    err = json.Unmarshal(content, &keywords)
+    if err != nil {
+        log.Fatal("Error during Unmarshal(): ", err)
+    }
+    return
 }

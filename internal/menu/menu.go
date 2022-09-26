@@ -2,11 +2,14 @@ package menu
 
 import (
 	"fmt"
-    "os"
-    "os/exec"
+	"os"
+	"os/exec"
+	"time"
 
+	"github.com/Johanx22x/multicore-project/internal/ansi"
 	"github.com/Johanx22x/multicore-project/internal/jsonm"
 	"github.com/Johanx22x/multicore-project/internal/scrap"
+	"github.com/Johanx22x/multicore-project/internal/server"
 )
 
 func clearScreen() {
@@ -16,17 +19,17 @@ func clearScreen() {
 }
 
 func dataInfo() {
-    fmt.Println(`
+    fmt.Printf(`%s
 ╔═══╗      ╔╗          ╔══╗     ╔═╗    
 ╚╗╔╗║     ╔╝╚╗         ╚╣╠╝     ║╔╝    
  ║║║║╔══╗ ╚╗╔╝╔══╗      ║║ ╔═╗ ╔╝╚╗╔══╗
  ║║║║╚ ╗║  ║║ ╚ ╗║      ║║ ║╔╗╗╚╗╔╝║╔╗║
 ╔╝╚╝║║╚╝╚╗ ║╚╗║╚╝╚╗    ╔╣╠╗║║║║ ║║ ║╚╝║
-╚═══╝╚═══╝ ╚═╝╚═══╝    ╚══╝╚╝╚╝ ╚╝ ╚══╝`)
+╚═══╝╚═══╝ ╚═╝╚═══╝    ╚══╝╚╝╚╝ ╚╝ ╚══╝%s%s`, ansi.Red(), ansi.Reset(), ansi.NewLine())
 }
 
 func thankYou() {
-    fmt.Println(`
+    fmt.Printf(`%s
 ╔═══╗                             ╔╗       ╔╗        
 ║╔═╗║                             ║║      ╔╝╚╗       
 ║╚══╗╔══╗╔══╗    ╔╗ ╔╗╔══╗╔╗╔╗    ║║ ╔══╗ ╚╗╔╝╔══╗╔═╗
@@ -34,11 +37,11 @@ func thankYou() {
 ║╚═╝║║║═╣║║═╣    ║╚═╝║║╚╝║║╚╝║    ║╚╗║╚╝╚╗ ║╚╗║║═╣║║ 
 ╚═══╝╚══╝╚══╝    ╚═╗╔╝╚══╝╚══╝    ╚═╝╚═══╝ ╚═╝╚══╝╚╝ 
                  ╔═╝║                                
-                 ╚══╝                                `)
+                 ╚══╝                                %s%s`, ansi.Red(), ansi.Reset(), ansi.NewLine())
 }
 
 func welcomeMessage() {
-    fmt.Println(`
+    fmt.Printf(`%s
 ╔═╗╔═╗    ╔╗  ╔╗                      ╔═══╗                          
 ║║╚╝║║    ║║ ╔╝╚╗                     ║╔═╗║                          
 ║╔╗╔╗║╔╗╔╗║║ ╚╗╔╝╔╗╔══╗╔══╗╔═╗╔══╗    ║╚══╗╔══╗╔═╗╔══╗ ╔══╗╔╗╔═╗ ╔══╗
@@ -46,11 +49,11 @@ func welcomeMessage() {
 ║║║║║║║╚╝║║╚╗ ║╚╗║║║╚═╗║╚╝║║║ ║║═╣    ║╚═╝║║╚═╗║║ ║╚╝╚╗║╚╝║║║║║║║║╚╝║
 ╚╝╚╝╚╝╚══╝╚═╝ ╚═╝╚╝╚══╝╚══╝╚╝ ╚══╝    ╚═══╝╚══╝╚╝ ╚═══╝║╔═╝╚╝╚╝╚╝╚═╗║
                                                        ║║        ╔═╝║
-                                                       ╚╝        ╚══╝`)
+                                                       ╚╝        ╚══╝%s%s`, ansi.Red(), ansi.Reset(), ansi.NewLine())
 }
 
 func loading() {
-    fmt.Println(`
+    fmt.Printf(`%s
 ╔╗              ╔╗                
 ║║              ║║                
 ║║   ╔══╗╔══╗ ╔═╝║╔╗╔═╗ ╔══╗      
@@ -58,21 +61,21 @@ func loading() {
 ║╚═╝║║╚╝║║╚╝╚╗║╚╝║║║║║║║║╚╝║╔╗╔╗╔╗
 ╚═══╝╚══╝╚═══╝╚══╝╚╝╚╝╚╝╚═╗║╚╝╚╝╚╝
                         ╔═╝║      
-                        ╚══╝      `)
+                        ╚══╝      %s%s`, ansi.Red(), ansi.Reset(), ansi.NewLine())
 }
 
 func loaded() {
-    fmt.Println(`
+    fmt.Printf(`%s
 ╔╗              ╔╗      ╔╗
 ║║              ║║      ║║
 ║║   ╔══╗╔══╗ ╔═╝║╔══╗╔═╝║
 ║║ ╔╗║╔╗║╚ ╗║ ║╔╗║║╔╗║║╔╗║
 ║╚═╝║║╚╝║║╚╝╚╗║╚╝║║║═╣║╚╝║
-╚═══╝╚══╝╚═══╝╚══╝╚══╝╚══╝`)
+╚═══╝╚══╝╚═══╝╚══╝╚══╝╚══╝%s%s`, ansi.Red(), ansi.Reset(), ansi.NewLine())
 }
 
 func sorryMessage() {
-    fmt.Println(`
+    fmt.Printf(`%s
 ╔═══╗                     
 ║╔═╗║                     
 ║╚══╗╔══╗╔═╗╔═╗╔╗ ╔╗      
@@ -80,26 +83,28 @@ func sorryMessage() {
 ║╚═╝║║╚╝║║║ ║║ ║╚═╝║╔╗╔╗╔╗
 ╚═══╝╚══╝╚╝ ╚╝ ╚═╗╔╝╚╝╚╝╚╝
                ╔═╝║       
-               ╚══╝       `)
+               ╚══╝       %s%s`, ansi.Red(), ansi.Reset(), ansi.NewLine())
 }
 
 func workersMessage() {
-    fmt.Println(`
+    fmt.Printf(`%s
 ╔═╗ ╔╗              ╔╗╔╗╔╗       ╔╗             
 ║║╚╗║║              ║║║║║║       ║║             
 ║╔╗╚╝║╔══╗╔╗╔╗╔╗    ║║║║║║╔══╗╔═╗║║╔╗╔══╗╔═╗╔══╗
 ║║╚╗║║║╔╗║║╚╝╚╝║    ║╚╝╚╝║║╔╗║║╔╝║╚╝╝║╔╗║║╔╝║══╣
 ║║ ║║║║║═╣╚╗╔╗╔╝    ╚╗╔╗╔╝║╚╝║║║ ║╔╗╗║║═╣║║ ╠══║
 ╚╝ ╚═╝╚══╝ ╚╝╚╝      ╚╝╚╝ ╚══╝╚╝ ╚╝╚╝╚══╝╚╝ ╚══╝ 
- `)
+ %s%s`, ansi.Red(), ansi.Reset(), ansi.NewLine())
 }
 
 func displayOptions() {
-    fmt.Println("2 - Obtain CSV table")
-    fmt.Println("3 - Obtain metadata from websites")
-    fmt.Println("4 - Analyze obtained data from websites")
-    fmt.Println("5 - Change the number of workers (default 15)")
-    fmt.Println("6 - Launch data charts local server")
+    fmt.Printf("(%s0%s) - Exit\n", ansi.BlueUnderline(), ansi.Reset())
+    fmt.Printf("(%s1%s) - Display options\n", ansi.BlueUnderline(), ansi.Reset())
+    fmt.Printf("(%s2%s) - Obtain CSV table\n", ansi.BlueUnderline(), ansi.Reset())
+    fmt.Printf("(%s3%s) - Obtain metadata from websites\n", ansi.BlueUnderline(), ansi.Reset())
+    fmt.Printf("(%s4%s) - Analyze obtained data from websites\n", ansi.BlueUnderline(), ansi.Reset())
+    fmt.Printf("(%s5%s) - Change the number of workers (default 15)\n", ansi.BlueUnderline(), ansi.Reset())
+    fmt.Printf("(%s6%s) - Launch data charts local server\n", ansi.BlueUnderline(), ansi.Reset())
     fmt.Println()
 }
 
@@ -116,27 +121,27 @@ func changeWorkers() (int, error) {
     clearScreen()
     workersMessage()
     for {
-        fmt.Println("Enter the new number of workers (0 exit to principal menu):")
+        fmt.Printf("Enter the new number of workers (%s0%s exit to principal menu): ", ansi.Cyan(), ansi.Reset())
         newWorkers, err := getInput()
         if err != nil {
             clearScreen()
             sorryMessage()
-            fmt.Printf("\nNo valid input, must be an integer!\n\n")
+            fmt.Printf("\n%sNo valid input, must be an integer!%s\n\n", ansi.CyanUnderline(), ansi.Reset())
             continue
         } 
         if newWorkers == 0 { 
-            err := fmt.Errorf("The amount of workers did not change!")
+            err := fmt.Errorf("%sThe amount of workers did not change!%s", ansi.CyanUnderline(), ansi.Reset())
             return 0, err 
         }
         if newWorkers < 1 || newWorkers > 100 {
             clearScreen()
             sorryMessage()
-            fmt.Printf("\nThis is a bad number, please choose a number between 1 and 100!\n\n")
+            fmt.Printf("\n%sThis is a bad number, please choose a number between %s1%s%s and %s100%s%s!%s\n\n", ansi.Cyan(), ansi.BlueUnderline(), ansi.Reset(), ansi.Cyan(), ansi.BlueUnderline(), ansi.Reset(), ansi.Cyan(), ansi.Reset())
             continue
         }
         clearScreen()
         welcomeMessage()
-        fmt.Printf("Now you have %d workers!\n\n", newWorkers)
+        fmt.Printf("%sNow you have %d workers!%s\n\n", ansi.Blue(), newWorkers, ansi.Reset())
         return newWorkers, nil
     }
 }
@@ -148,7 +153,7 @@ func Menu() {
     clearScreen()
     welcomeMessage()
     for {
-        fmt.Println("What do you want to do? (0 exit / 1 show options)")
+        fmt.Printf("Choose an option (%s0%s exit / %s1%s show options): ", ansi.Cyan(), ansi.Reset(), ansi.Cyan(), ansi.Reset())
 
         opt, err := getInput()
         if err != nil {
@@ -161,24 +166,28 @@ func Menu() {
 
         switch opt {
         case 0:
+            // NOTE: Exit
             clearScreen()
             thankYou()
-            fmt.Println("\nThank you for use our system.\n\nHave a nice day!")
+            fmt.Printf("\n%sThank you for use our system.\n\nHave a nice day!%s\n", ansi.Yellow(), ansi.Reset())
             return
         case 1:
+            // NOTE: Show the options of the program
             clearScreen()
             welcomeMessage()
             displayOptions()
         case 2:
+            // NOTE: Load the CSV table with the 1000 most visited websites
             clearScreen()
             loading()
             fmt.Println("\nLoading table...")
             scrap.ObtainCSV()
             clearScreen()
             loaded()
-            fmt.Println("\nTable loaded!")
+            fmt.Printf("\n%sTable loaded!%s\n", ansi.Blue(), ansi.Reset())
             fmt.Println()
         case 3:
+            // NOTE: Obtain the medata of every website
             // TODO: implement the time in which the data is obtained
             clearScreen()
             loading()
@@ -186,25 +195,32 @@ func Menu() {
             jsonm.SaveMetadata(workers)
             clearScreen()
             loaded()
-            fmt.Println("\nMetadata obtained!")
+            fmt.Printf("\n%sMetadata obtained!%s\n", ansi.Blue(), ansi.Reset())
             fmt.Println()
         case 4:
+            // NOTE: Obtain data information and create the charts
             clearScreen()
             dataInfo()
             jsonm.ShowWebsitesInfo()
         case 5:
+            // NOTE: Change the number of workers that the system actually has
             newWorkers, err := changeWorkers()
             if err != nil {
                 clearScreen()
                 welcomeMessage()
-                fmt.Printf("%s\n\n", err)
+                fmt.Printf("\n%s%s%s\n\n", ansi.Red(), err, ansi.Reset())
             } else {
                 workers = newWorkers
             }
+        case 6:
+            // NOTE: Launch the server to show the charts
+            go server.Launch()
+            time.Sleep(1 * time.Millisecond)
         default:
+            // NOTE: default case in case of any error
             clearScreen()
             welcomeMessage()
-            fmt.Printf("Please choose a valid option!\n\n")
+            fmt.Printf("%sPlease choose a valid option!%s\n\n", ansi.Red(), ansi.Reset())
             displayOptions()
         }
     }
