@@ -2,10 +2,7 @@ package token;
 
 import "strings"
 
-func tokenize(text string) (tokenizeText []string) {
-    splitText := strings.Fields(text);
-
-    // TODO: tokenize text
-    tokenizeText = splitText
-    return 
+func tokenize(text string) []string {
+    // FIX: Find a better way to tokenize and delete unnecesary words
+    return strings.Fields(text);
 }
