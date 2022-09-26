@@ -2,6 +2,7 @@ package classifier
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/Johanx22x/multicore-project/internal/token"
 	"github.com/crawlerclub/ce"
@@ -32,10 +33,10 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
             for idxKey, val := range keywords {
                 for _, word := range val {
                     for _, itemWord := range token.Tokenize(item.Text) {
-                        if word == itemWord {
+                        if word == strings.ToLower(itemWord) {
                             topic := topicsWeight[idx]
                             topic.topics[idxKey]++
-                        }
+                        } 
                     }
                 }
             }
