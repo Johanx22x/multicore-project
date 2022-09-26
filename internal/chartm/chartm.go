@@ -8,14 +8,14 @@ import (
 	"github.com/go-echarts/go-echarts/v2/types"
 )
 
-func CreateChart(langs map[string]float64, title, name string) {
-    langsPie := []opts.PieData{}
-    for key, val := range langs {
+func CreateChart(dataMap map[string]float64, title, name string) {
+    newPieData := []opts.PieData{}
+    for key, val := range dataMap {
         tmpPie := opts.PieData{Name: key, Value: val}
-        langsPie = append(langsPie, tmpPie)
+        newPieData = append(newPieData, tmpPie)
     }
 
-    languages := langsPie
+    dataToChart := newPieData
     pie := charts.NewPie()
 
     pie.SetGlobalOptions(
@@ -23,7 +23,7 @@ func CreateChart(langs map[string]float64, title, name string) {
         charts.WithTitleOpts(opts.Title{Title: title}),
     )
 
-    pie.AddSeries(name, languages)
+    pie.AddSeries(name, dataToChart)
 
 	f, _ := os.Create("./Data/Chart/" + name + ".html")
 	defer f.Close()
