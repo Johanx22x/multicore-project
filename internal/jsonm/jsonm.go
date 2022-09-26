@@ -10,6 +10,7 @@ import (
 
 	"github.com/Johanx22x/multicore-project/internal/ansi"
 	"github.com/Johanx22x/multicore-project/internal/chartm"
+	"github.com/Johanx22x/multicore-project/internal/classifier"
 	"github.com/Johanx22x/multicore-project/internal/concurrent"
 	"github.com/Johanx22x/multicore-project/internal/csv"
 	"github.com/Johanx22x/multicore-project/internal/scrap"
@@ -113,6 +114,7 @@ func ShowWebsitesInfo() {
 
     chartm.CreateChart(langs, "Websites languages", "language")
     chartm.CreateChart(locations, "Websites locations", "location")
+    classifier.NaiveBayes(payload, getKeywords());
 }
 
 func getKeywords() (keywords map[string][]string) {
