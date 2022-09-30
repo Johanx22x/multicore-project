@@ -1,4 +1,4 @@
-# Websites Content Analysis Using Multicore
+# Websites Content Analysis Using Multithreading
 
 Terminal based program to analyze the metadata of the 1000 most visited websites around the world, 
 implementing [Go programming language](https://go.dev/), web scraping with [crawlerclub](https://github.com/crawlerclub/ce), 
