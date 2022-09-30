@@ -13,4 +13,6 @@ $ go run main.go
 
 # Warning
 
-Do not compile the source code, there is a null pointer error if you try to run the binary file, instead use `go run main.go` to run the program.
+Do not compile the source code, there is a null pointer error if you try to run the binary file.
+
+Instead use `go run main.go` to run the program.
