@@ -1,3 +1,4 @@
+// TODO: Add documentation
 package menu
 
 import (
@@ -148,6 +149,7 @@ func changeWorkers() (int, error) {
 
 func Menu() {
     // Number of workers in concurrent calls
+    // Can be modified
     workers := 15
 
     clearScreen()
