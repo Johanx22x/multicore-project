@@ -26,9 +26,11 @@ func findMajor(topicMap map[string]*topicMap) string {
 func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
     // Create a map to store the total of keywords in a topic
     topicsKeywordLength := make(map[string]int)
+    totalWords := 0
     for key, value := range keywords {
         // Add the key with the topic name and set the value to the total amount of keywords
         topicsKeywordLength[key] = len(value)
+        totalWords += len(value)
     }
 
     topicsWeight := make(map[string]*topicMap)
@@ -64,21 +66,22 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
             topic.topics["other"] = cont
         }
     }
-    // FORMULA = (wordPerTopic / totalWords) * (Incidences / wordPerTopic)
 
-    majorValue := 0
+    majorValue := 0.0
     totalTopics := make(map[string]float64)
     for websiteKey, val := range topicsWeight {
         for key, valfloat := range val.topics {
             if strings.ToLower(key) == "other" {
                 continue
             }
-            if majorValue < int(valfloat) {
+            // FORMULA = (wordPerTopic / totalWords) * (Incidences / wordPerTopic)
+            wordPerTopic := topicsKeywordLength[key]
+            if majorValue < ((float64(wordPerTopic) / float64(totalWords)) * (valfloat / float64(wordPerTopic))) {
                 topicsWeight[websiteKey].WebsiteType = key
             }
             totalTopics[key] += valfloat       
         }
-        fmt.Println(topicsWeight[websiteKey])
+        fmt.Println(websiteKey, val)
     }
 
     chartm.CreateChart(totalTopics, "Keywords ocurrences inside websites", "total-keywords")
