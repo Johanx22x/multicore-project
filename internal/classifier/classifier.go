@@ -67,10 +67,10 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
         }
     }
 
-    majorValue := 0.0
     totalTopics := make(map[string]float64)
     for websiteKey, val := range topicsWeight {
         for key, valfloat := range val.topics {
+            majorValue := 0.0
             if strings.ToLower(key) == "other" {
                 continue
             }
@@ -81,10 +81,11 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
             // FIXME: Skip results when are equal
             if majorValue < result  {
                 topicsWeight[websiteKey].WebsiteType = key
+                fmt.Println(websiteKey, "now is", key, result, val)
+                majorValue = result
             } 
             totalTopics[key] += valfloat       
         }
-        fmt.Println(websiteKey, val)
     }
 
     chartm.CreateChart(totalTopics, "Keywords ocurrences inside websites", "total-keywords")
