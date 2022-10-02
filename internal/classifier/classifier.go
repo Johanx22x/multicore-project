@@ -67,20 +67,19 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
     // FORMULA = (wordPerTopic / totalWords) * (Incidences / wordPerTopic)
 
     majorValue := 0
-    var majorName string
     totalTopics := make(map[string]float64)
-    for _, val := range topicsWeight {
+    for websiteKey, val := range topicsWeight {
         for key, valfloat := range val.topics {
             if strings.ToLower(key) == "other" {
                 continue
             }
-            if majorValue < int(totalTopics[key]) {
-                majorName = key
+            if majorValue < int(valfloat) {
+                topicsWeight[websiteKey].WebsiteType = key
             }
             totalTopics[key] += valfloat       
         }
+        fmt.Println(topicsWeight[websiteKey])
     }
-    majorName = "Unknow"
 
     chartm.CreateChart(totalTopics, "Keywords ocurrences inside websites", "total-keywords")
 }
