@@ -1,18 +1,56 @@
 {
-    "News": [
+    "Relevant": [
         "accident",
         "war",
         "news",
         "notice",
         "world",
-        "breaking"
+        "breaking",
+        "politic",
+        "voices",
+        "bussiness",
+        "money",
+        "parent",
+        "poor",
+        "rich",
+        "ukraine",
+        "russia",
+        "job",
+        "queer",
+        "lgtb",
+        "lgbt",
+        "work"
     ],
-    "Entertaiment": [
+    "Interest": [
         "video",
         "audio",
         "image",
         "shopping",
         "shop",
-        "family"
+        "family",
+        "entertainment",
+        "movie",
+        "travel",
+        "style",
+        "beauty",
+        "nature",
+        "fun",
+        "sport",
+        "fotball",
+        "soccer",
+        "baseball",
+        "volleyball",
+        "basketball",
+        "golf",
+        "racing",
+        "car",
+        "celebrity",
+        "health",
+        "comedy",
+        "drama",
+        "food",
+        "tv",
+        "drink",
+        "games"
     ]
 }
