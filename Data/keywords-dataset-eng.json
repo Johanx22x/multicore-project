@@ -1,0 +1,18 @@
+{
+    "News": [
+        "accident",
+        "war",
+        "news",
+        "notice",
+        "world",
+        "breaking"
+    ],
+    "Entertaiment": [
+        "video",
+        "audio",
+        "image",
+        "shopping",
+        "shop",
+        "family"
+    ]
+}

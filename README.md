@@ -5,7 +5,11 @@ implementing [Go programming language](https://go.dev/), web scraping with [craw
 multithreading using goroutines, chart libraries with [go-echarts](https://github.com/go-echarts/go-echarts) 
 and a small local web server to host the charts.
 
-# Compiling instructions
+# Main Menu
+
+# Obtained charts example
+
+# Running instructions
 
 ## Dependencies
 

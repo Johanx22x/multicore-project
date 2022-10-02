@@ -2,6 +2,7 @@
 package classifier
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/Johanx22x/multicore-project/internal/chartm"
@@ -10,7 +11,15 @@ import (
 )
 
 type topicMap struct {
-    topics map[string]float64
+    topics map[string]float64;
+    WebsiteType string;
+}
+
+func findMajor(topicMap map[string]*topicMap) string {
+    for key, value := range topicMap {
+        fmt.Println(key, value)
+    }
+    return "Know"
 }
 
 // TODO: Apply classification
@@ -24,17 +33,17 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
 
     topicsWeight := make(map[string]*topicMap)
     for idx, val := range payload {
-        if val.Text != "" {
-            for idxKey := range keywords {
-                topic := topicsWeight[idx]
-                if topic == nil {
-                    topic = &topicMap{}
-                    topic.topics = make(map[string]float64)
-                    topic.topics[idxKey] = 0
-                    topicsWeight[idx] = topic
-                }
-            }
+        if (val.Text == "") {
+            continue
         }
+        topic := topicsWeight[idx]
+        topic = &topicMap{}
+        topic.topics = make(map[string]float64)
+        for idxKey := range keywords {
+            topic.topics[idxKey] = 0
+        }
+        topic.WebsiteType = "Unknow"
+        topicsWeight[idx] = topic
     }
 
     for idx, item := range payload {
@@ -55,17 +64,23 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
             topic.topics["other"] = cont
         }
     }
+    // FORMULA = (wordPerTopic / totalWords) * (Incidences / wordPerTopic)
 
+    majorValue := 0
+    var majorName string
     totalTopics := make(map[string]float64)
     for _, val := range topicsWeight {
-        // fmt.Println(key, val)
         for key, valfloat := range val.topics {
             if strings.ToLower(key) == "other" {
                 continue
             }
+            if majorValue < int(totalTopics[key]) {
+                majorName = key
+            }
             totalTopics[key] += valfloat       
         }
     }
+    majorName = "Unknow"
 
     chartm.CreateChart(totalTopics, "Keywords ocurrences inside websites", "total-keywords")
 }
