@@ -119,7 +119,7 @@ func ShowWebsitesInfo() {
 
 func getKeywords() (keywords map[string][]string) {
     // Read the file and error management
-    content, err := ioutil.ReadFile("Data/keywords-dataset-eng.json")
+    content, err := ioutil.ReadFile("Data/keywords-dataset.json")
     if err != nil {
         log.Fatal(err)
     }

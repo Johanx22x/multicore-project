@@ -30,4 +30,3 @@ func CreateChart(dataMap map[string]float64, title, name string) {
 
     pie.Render(f)
 }
-

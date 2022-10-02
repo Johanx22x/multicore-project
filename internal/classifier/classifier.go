@@ -1,4 +1,3 @@
-// TODO: Add documentation to this module
 package classifier
 
 import (
@@ -10,12 +9,12 @@ import (
 	"github.com/crawlerclub/ce"
 )
 
-type topicMap struct {
+type TopicMap struct {
     topics map[string]float64;
     WebsiteType string;
 }
 
-func findMajor(topicMap map[string]*topicMap) string {
+func findMajor(topicMap map[string]*TopicMap) string {
     for key, value := range topicMap {
         fmt.Println(key, value)
     }
@@ -33,13 +32,13 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
         totalWords += len(value)
     }
 
-    topicsWeight := make(map[string]*topicMap)
+    topicsWeight := make(map[string]*TopicMap)
     for idx, val := range payload {
         if (val.Text == "") {
             continue
         }
         topic := topicsWeight[idx]
-        topic = &topicMap{}
+        topic = &TopicMap{}
         topic.topics = make(map[string]float64)
         for idxKey := range keywords {
             topic.topics[idxKey] = 0
@@ -54,7 +53,7 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
             for idxKey, val := range keywords {
                 for _, word := range val {
                     for _, itemWord := range token.Tokenize(item.Text) {
-                        if word == strings.ToLower(itemWord) {
+                        if strings.Contains(word, strings.ToLower(itemWord)) {
                             topic := topicsWeight[idx]
                             topic.topics[idxKey]++
                             cont--
@@ -69,11 +68,13 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
 
     totalTopics := make(map[string]float64)
     for websiteKey, val := range topicsWeight {
+        chartMap := make(map[string]float64)
         for key, valfloat := range val.topics {
             majorValue := 0.0
             if strings.ToLower(key) == "other" {
                 continue
             }
+            chartMap[key] = valfloat
             wordPerTopic := topicsKeywordLength[key]
 
             // FORMULA = (wordPerTopic / totalWords) * (Incidences / wordPerTopic)
@@ -81,11 +82,13 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
             // FIXME: Skip results when are equal
             if majorValue < result  {
                 topicsWeight[websiteKey].WebsiteType = key
-                fmt.Println(websiteKey, "now is", key, result, val)
                 majorValue = result
             } 
             totalTopics[key] += valfloat       
         }
+        name := strings.Trim(websiteKey, "https://")
+        fmt.Println(name, chartMap)
+        chartm.CreateChart(chartMap, name, name)
     }
 
     chartm.CreateChart(totalTopics, "Keywords ocurrences inside websites", "total-keywords")
