@@ -74,11 +74,14 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
             if strings.ToLower(key) == "other" {
                 continue
             }
-            // FORMULA = (wordPerTopic / totalWords) * (Incidences / wordPerTopic)
             wordPerTopic := topicsKeywordLength[key]
-            if majorValue < ((float64(wordPerTopic) / float64(totalWords)) * (valfloat / float64(wordPerTopic))) {
+
+            // FORMULA = (wordPerTopic / totalWords) * (Incidences / wordPerTopic)
+            result := ((float64(wordPerTopic) / float64(totalWords)) * (valfloat / float64(wordPerTopic)))
+            // FIXME: Skip results when are equal
+            if majorValue < result  {
                 topicsWeight[websiteKey].WebsiteType = key
-            }
+            } 
             totalTopics[key] += valfloat       
         }
         fmt.Println(websiteKey, val)
