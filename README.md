@@ -15,7 +15,12 @@ multithreading using goroutines and chart libraries with [go-echarts](https://gi
 
 The data processed is stored in JSON and CSV files.
 
-![JSON](https://example.com)
+<br />
+<div align="center">
+  <a href="https://github.com/Johanx22x/multicore-project">
+    <img src="images/gopher-vs-json.png" alt="Logo" width="80" height="80">
+  </a>
+</div>
 
 # Main Menu
 
@@ -23,7 +28,7 @@ The data processed is stored in JSON and CSV files.
 
 # Obtained charts example
 
-![Chart example](https://github.com/Johanx22x/multicore-project/images/chart-example.png)
+![Chart example](https://raw.githubusercontent.com/Johanx22x/multicore-project/master/images/chart-example.png)
 
 # Running instructions
 
