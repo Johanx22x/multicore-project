@@ -13,14 +13,15 @@ implementing [Go programming language](https://go.dev/), web scraping with [craw
 multithreading using goroutines and chart libraries with [go-echarts](https://github.com/go-echarts/go-echarts). 
 <!--and a local web server to host the charts.-->
 
-The data processed is stored in JSON and CSV files.
-
 <br />
 <div align="center">
   <a href="https://github.com/Johanx22x/multicore-project">
-    <img src="images/gopher-vs-json.png" alt="Logo" width="80" height="80">
+    <img src="images/gopher-vs-json.png" alt="JSON" width="200" height="200">
   </a>
 </div>
+
+The data processed and the keywords dataset are stored in JSON files, the top 1000 websites is extracted from 
+[htmlstrip.com](https://www.htmlstrip.com/alexa-top-1000-most-visited-websites#) and stored in a CSV file.
 
 # Main Menu
 
