@@ -5,12 +5,10 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"time"
 
 	"github.com/Johanx22x/multicore-project/internal/ansi"
 	"github.com/Johanx22x/multicore-project/internal/jsonm"
 	"github.com/Johanx22x/multicore-project/internal/scrap"
-	"github.com/Johanx22x/multicore-project/internal/server"
 )
 
 func clearScreen() {
