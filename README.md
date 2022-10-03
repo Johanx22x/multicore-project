@@ -27,7 +27,7 @@ The data processed and the keywords dataset are stored in JSON files, the top 10
 
 ![Main Menu](https://raw.githubusercontent.com/Johanx22x/multicore-project/master/images/main-menu.png)
 
-# Obtained charts example
+# Obtained Chart Example
 
 ![Chart example](https://raw.githubusercontent.com/Johanx22x/multicore-project/master/images/chart-example.png)
 
