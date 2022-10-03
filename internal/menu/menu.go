@@ -103,7 +103,6 @@ func displayOptions() {
     fmt.Printf("(%s3%s) - Obtain metadata from websites\n", ansi.BlueUnderline(), ansi.Reset())
     fmt.Printf("(%s4%s) - Analyze obtained data from websites\n", ansi.BlueUnderline(), ansi.Reset())
     fmt.Printf("(%s5%s) - Change the number of workers (default 15)\n", ansi.BlueUnderline(), ansi.Reset())
-    fmt.Printf("(%s6%s) - Launch data charts local server\n", ansi.BlueUnderline(), ansi.Reset())
     fmt.Println()
 }
 
