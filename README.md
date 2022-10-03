@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Johanx22x/multicore-project">
-    <img src="images/golangroutines-2612414795.png" alt="Logo" width="80" height="80">
+    <img src="images/golangroutines-2612414795.png" alt="Logo" width="200" height=200">
   </a>
 
   <h3 align="center">Websites Content Analysis Using Multithreading</h3>
@@ -11,7 +11,6 @@
 Terminal based program to analyze the metadata of the 1000 most visited websites around the world, 
 implementing [Go programming language](https://go.dev/), web scraping with [crawlerclub](https://github.com/crawlerclub/ce), 
 multithreading using goroutines and chart libraries with [go-echarts](https://github.com/go-echarts/go-echarts). 
-<!--and a local web server to host the charts.-->
 
 <br />
 <div align="center">
@@ -30,6 +29,15 @@ The data processed and the keywords dataset are stored in JSON files, the top 10
 # Obtained Chart Example
 
 ![Chart example](https://raw.githubusercontent.com/Johanx22x/multicore-project/master/images/chart-example.png)
+
+The found keywords are stored in a folder with the name of the web page, in this folder the chart is also located.
+
+# Download the project
+
+```bash
+$ git clone https://github.com/Johanx22x/multicore-project.git 
+$ cd multicore-project
+```
 
 # Running instructions
 
