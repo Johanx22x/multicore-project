@@ -11,6 +11,7 @@ import (
 
 type TopicMap struct {
     topics map[string]float64;
+    words []string;
     WebsiteType string;
 }
 
@@ -49,14 +50,17 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
 
     for idx, item := range payload {
         if item.Text != "" {
-            cont :=  float64(len(token.Tokenize(item.Text)))
+            cont := 0.0
             for idxKey, val := range keywords {
                 for _, word := range val {
                     for _, itemWord := range token.Tokenize(item.Text) {
-                        if strings.Contains(word, strings.ToLower(itemWord)) {
+                        str := strings.ToLower(itemWord)
+                        if strings.Contains(str, word) {
                             topic := topicsWeight[idx]
                             topic.topics[idxKey]++
-                            cont--
+                            topic.words = append(topic.words, str)
+                        } else {
+                            cont++
                         } 
                     }
                 }
@@ -69,26 +73,29 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
     totalTopics := make(map[string]float64)
     for websiteKey, val := range topicsWeight {
         chartMap := make(map[string]float64)
+        majorName := "Unknow"
+        majorValue := 0.0
         for key, valfloat := range val.topics {
-            majorValue := 0.0
             if strings.ToLower(key) == "other" {
                 continue
             }
             chartMap[key] = valfloat
             wordPerTopic := topicsKeywordLength[key]
 
-            // FORMULA = (wordPerTopic / totalWords) * (Incidences / wordPerTopic)
             result := ((float64(wordPerTopic) / float64(totalWords)) * (valfloat / float64(wordPerTopic)))
-            // FIXME: Skip results when are equal
+
             if majorValue < result  {
-                topicsWeight[websiteKey].WebsiteType = key
                 majorValue = result
-            } 
+                majorName = key
+            }
             totalTopics[key] += valfloat       
         }
+        topicsWeight[websiteKey].WebsiteType = majorName 
         name := strings.Trim(websiteKey, "https://")
-        fmt.Println(name, chartMap)
+        name += " [" + val.WebsiteType + "]"
+
         chartm.CreateChart(chartMap, name, name)
+        chartm.SaveWords(val.words, name)
     }
 
     chartm.CreateChart(totalTopics, "Keywords ocurrences inside websites", "total-keywords")
