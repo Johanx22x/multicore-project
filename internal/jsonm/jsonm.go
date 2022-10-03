@@ -110,7 +110,7 @@ func ShowWebsitesInfo() {
     }
 
     fmt.Printf("\nTotal number of websites from which information could be extracted: %s%d/1000%s\n\n", ansi.BlueUnderline(), contContent, ansi.Reset())
-    fmt.Printf("%sLaunch the local server to see more interactive content!%s\n\n", ansi.CyanUnderline(), ansi.Reset())
+    fmt.Printf("%sYou can see the extracted charts and data in Data/Chart/!%s\n\n", ansi.CyanUnderline(), ansi.Reset())
 
     chartm.CreateChart(langs, "Websites languages", "language")
     chartm.CreateChart(locations, "Websites locations", "location")

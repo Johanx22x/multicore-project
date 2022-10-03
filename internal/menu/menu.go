@@ -214,10 +214,6 @@ func Menu() {
             } else {
                 workers = newWorkers
             }
-        case 6:
-            // NOTE: Launch the server to show the charts
-            go server.Launch()
-            time.Sleep(1 * time.Millisecond)
         default:
             // NOTE: default case in case of any error
             clearScreen()
