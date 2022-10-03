@@ -15,7 +15,7 @@ multithreading using goroutines and chart libraries with [go-echarts](https://gi
 
 The data processed is stored in JSON and CSV files.
 
-[![JSON][json]](https://github.com/Johanx22x/multicore-project/images/gopher-vs-json.png)
+[![JSON][json]](https://example.com)
 
 # Main Menu
 
