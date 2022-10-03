@@ -13,13 +13,13 @@ implementing [Go programming language](https://go.dev/), web scraping with [craw
 multithreading using goroutines and chart libraries with [go-echarts](https://github.com/go-echarts/go-echarts). 
 <!--and a local web server to host the charts.-->
 
-The information is stored in JSON and CSV files.
+The data processed is stored in JSON and CSV files.
 
 [![JSON][json]](https://github.com/Johanx22x/multicore-project/images/gopher-vs-json.png)
 
 # Main Menu
 
-[![Main Menu][main-menu]](https://github.com/Johanx22x/multicore-project/images/main-menu.png)
+[![Main Menu][main-menu]](https://raw.githubusercontent.com/Johanx22x/multicore-project/master/images/main-menu.png)
 
 # Obtained charts example
 
