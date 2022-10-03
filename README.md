@@ -1,8 +1,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Johanx22x/multicore-project/images/golangroutines-2612414795.png">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Johanx22x/multicore-project">
+    <img src="images/golangroutines-2612414795.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Websites Content Analysis Using Multithreading</h3>
@@ -15,15 +15,15 @@ multithreading using goroutines and chart libraries with [go-echarts](https://gi
 
 The data processed is stored in JSON and CSV files.
 
-[![JSON][json]](https://example.com)
+![JSON](https://example.com)
 
 # Main Menu
 
-[![Main Menu][main-menu]](https://raw.githubusercontent.com/Johanx22x/multicore-project/master/images/main-menu.png)
+![Main Menu](https://raw.githubusercontent.com/Johanx22x/multicore-project/master/images/main-menu.png)
 
 # Obtained charts example
 
-[![Chart example][chart-example]](https://github.com/Johanx22x/multicore-project/images/chart-example.png)
+![Chart example](https://github.com/Johanx22x/multicore-project/images/chart-example.png)
 
 # Running instructions
 
