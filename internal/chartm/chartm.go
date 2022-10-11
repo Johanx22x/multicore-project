@@ -27,6 +27,7 @@ func CreateChart(dataMap map[string]float64, title, name string) {
 
     pie.AddSeries(name, dataToChart)
 
+    os.Mkdir("./Data/Chart/", os.ModePerm);
     os.Mkdir("./Data/Chart/" + name, os.ModePerm);
 	f, _ := os.Create("./Data/Chart/" + name + "/" + name + ".html")
 	defer f.Close()
