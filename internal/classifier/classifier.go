@@ -1,7 +1,6 @@
 package classifier
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/Johanx22x/multicore-project/internal/chartm"
@@ -9,20 +8,14 @@ import (
 	"github.com/crawlerclub/ce"
 )
 
+// A struct to store the websites topics information in a better way
 type TopicMap struct {
     topics map[string]float64;
     words []string;
     WebsiteType string;
 }
 
-func findMajor(topicMap map[string]*TopicMap) string {
-    for key, value := range topicMap {
-        fmt.Println(key, value)
-    }
-    return "Know"
-}
-
-// TODO: Apply classification
+// Naive Bayes classifier
 func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
     // Create a map to store the total of keywords in a topic
     topicsKeywordLength := make(map[string]int)
@@ -33,6 +26,7 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
         totalWords += len(value)
     }
 
+    // Create a new map to store the keywords weight
     topicsWeight := make(map[string]*TopicMap)
     for idx, val := range payload {
         if (val.Text == "") {
@@ -48,6 +42,7 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
         topicsWeight[idx] = topic
     }
 
+    // Iterate over the websites
     for idx, item := range payload {
         if item.Text != "" {
             cont := 0.0
@@ -55,11 +50,12 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
                 for _, word := range val {
                     for _, itemWord := range token.Tokenize(item.Text) {
                         str := strings.ToLower(itemWord)
+                        // Check if the keywords is a substring
                         if strings.Contains(str, word) {
                             topic := topicsWeight[idx]
                             topic.topics[idxKey]++
                             topic.words = append(topic.words, str)
-                        } else {
+                        } else { // Increment the OTHER cont
                             cont++
                         } 
                     }
@@ -70,7 +66,10 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
         }
     }
 
+    // Create the total topics map to create a new chart
     totalTopics := make(map[string]float64)
+
+    // iterate over the topicsWeight map to get the topic of the webpages
     for websiteKey, val := range topicsWeight {
         chartMap := make(map[string]float64)
         majorName := "Unknow"
@@ -82,6 +81,7 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
             chartMap[key] = valfloat
             wordPerTopic := topicsKeywordLength[key]
 
+            // Naive Bayes classification accordind to some variables
             result := ((float64(wordPerTopic) / float64(totalWords)) * (valfloat / float64(wordPerTopic)))
 
             if majorValue < result  {
@@ -94,9 +94,11 @@ func NaiveBayes(payload map[string]ce.Doc, keywords map[string][]string) {
         name := strings.Trim(websiteKey, "https://")
         name += " [" + val.WebsiteType + "]"
 
+        // Create a chart and save the words for the current website
         chartm.CreateChart(chartMap, name, name)
         chartm.SaveWords(val.words, name)
     }
 
+    // Create a chart with all the ocurrences
     chartm.CreateChart(totalTopics, "Keywords ocurrences inside websites", "total-keywords")
 }

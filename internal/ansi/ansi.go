@@ -1,5 +1,7 @@
 package ansi
 
+// This package is an utility for ansii colors
+
 func Black() string {
     return "\u001b[30m"
 }

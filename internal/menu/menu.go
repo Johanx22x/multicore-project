@@ -1,4 +1,3 @@
-// TODO: Add documentation
 package menu
 
 import (
@@ -11,6 +10,7 @@ import (
 	"github.com/Johanx22x/multicore-project/internal/scrap"
 )
 
+// Clear the console screen
 func clearScreen() {
     cmd := exec.Command("clear")
     cmd.Stdout = os.Stdout
@@ -96,6 +96,7 @@ func workersMessage() {
  %s%s`, ansi.Red(), ansi.Reset(), ansi.NewLine())
 }
 
+// Display menu options
 func displayOptions() {
     fmt.Printf("(%s0%s) - Exit\n", ansi.BlueUnderline(), ansi.Reset())
     fmt.Printf("(%s1%s) - Display options\n", ansi.BlueUnderline(), ansi.Reset())
@@ -106,6 +107,7 @@ func displayOptions() {
     fmt.Println()
 }
 
+// Get input, utilitie for the main menu
 func getInput() (opt int, err error) {
     _, err = fmt.Scan(&opt)
     if err != nil {
@@ -115,23 +117,29 @@ func getInput() (opt int, err error) {
     return
 }
 
+// Chnage the current amount of worker
 func changeWorkers() (int, error) {
     clearScreen()
     workersMessage()
+
+    // Sub menu to set the workers
     for {
         fmt.Printf("Enter the new number of workers (%s0%s exit to principal menu): ", ansi.Cyan(), ansi.Reset())
         newWorkers, err := getInput()
         if err != nil {
+            // NOTE: Manage input error
             clearScreen()
             sorryMessage()
             fmt.Printf("\n%sNo valid input, must be an integer!%s\n\n", ansi.CyanUnderline(), ansi.Reset())
             continue
         } 
         if newWorkers == 0 { 
+            // NOTE: No changes in the workers amount
             err := fmt.Errorf("%sThe amount of workers did not change!%s", ansi.CyanUnderline(), ansi.Reset())
             return 0, err 
         }
         if newWorkers < 1 || newWorkers > 100 {
+            // NOTE: No valid number
             clearScreen()
             sorryMessage()
             fmt.Printf("\n%sThis is a bad number, please choose a number between %s1%s%s and %s100%s%s!%s\n\n", ansi.Cyan(), ansi.BlueUnderline(), ansi.Reset(), ansi.Cyan(), ansi.BlueUnderline(), ansi.Reset(), ansi.Cyan(), ansi.Reset())
@@ -140,11 +148,15 @@ func changeWorkers() (int, error) {
         clearScreen()
         welcomeMessage()
         fmt.Printf("%sNow you have %d workers!%s\n\n", ansi.Blue(), newWorkers, ansi.Reset())
+
         return newWorkers, nil
     }
 }
 
 func Menu() {
+    // Create the chart folder 
+    os.Mkdir("./Data/Chart/", os.ModePerm);
+
     // Number of workers in concurrent calls
     // Can be modified
     workers := 15
@@ -154,6 +166,7 @@ func Menu() {
     for {
         fmt.Printf("Choose an option (%s0%s exit / %s1%s show options): ", ansi.Cyan(), ansi.Reset(), ansi.Cyan(), ansi.Reset())
 
+        // Read the desired option by the user
         opt, err := getInput()
         if err != nil {
             clearScreen()
@@ -187,7 +200,6 @@ func Menu() {
             fmt.Println()
         case 3:
             // NOTE: Obtain the medata of every website
-            // TODO: implement the time in which the data is obtained
             clearScreen()
             loading()
             fmt.Println("\nObtaining metadata...")

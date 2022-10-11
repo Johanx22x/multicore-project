@@ -89,6 +89,7 @@ func loadMetadata() (payload map[string]ce.Doc) {
         log.Fatal(err)
     }
 
+    // Unmarshal the content with the sites metadata
     err = json.Unmarshal(content, &payload)
     if err != nil {
         log.Fatal("Error during Unmarshal(): ", err)
@@ -96,11 +97,14 @@ func loadMetadata() (payload map[string]ce.Doc) {
     return 
 }
 
+// Display the websites information and create the charts
 func ShowWebsitesInfo() {
+    // Create the maps and the conunter
     langs := make(map[string]float64)
     locations := make(map[string]float64)
     contContent := 0
 
+    // Iterate over the payload and increment values according to the key
     payload := loadMetadata()
     for _, page := range payload {
         if page.Text == "" { continue }
@@ -112,8 +116,11 @@ func ShowWebsitesInfo() {
     fmt.Printf("\nTotal number of websites from which information could be extracted: %s%d/1000%s\n\n", ansi.BlueUnderline(), contContent, ansi.Reset())
     fmt.Printf("%sYou can see the extracted charts and data in Data/Chart/!%s\n\n", ansi.CyanUnderline(), ansi.Reset())
 
+    // Create the language chart
     chartm.CreateChart(langs, "Websites languages", "language")
+    // Create the locations chart
     chartm.CreateChart(locations, "Websites locations", "location")
+    // Create the chart for every webpage
     classifier.NaiveBayes(payload, getKeywords());
 }
 
@@ -124,6 +131,7 @@ func getKeywords() (keywords map[string][]string) {
         log.Fatal(err)
     }
 
+    // Unmarshal the json with the keywords
     err = json.Unmarshal(content, &keywords)
     if err != nil {
         log.Fatal("Error during Unmarshal(): ", err)
